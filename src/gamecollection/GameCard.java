@@ -116,5 +116,17 @@ public class GameCard
   }
 
 
+  //Need to realize chicking the console of copies;
 
+  public boolean hasConsole(String console)
+  {
+    for(int i = 0; i < copies.size(); i++)
+    {
+      if(copies.get(i).getConsole().equalsIgnoreCase(console))
+      {
+        return true;
+      }
+    }
+    return false;
+  }
 }

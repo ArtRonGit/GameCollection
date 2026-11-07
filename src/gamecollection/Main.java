@@ -11,9 +11,11 @@ public class Main
 
     Game game1 = new Game("Minecraft", LocalDate.of(2011,11,18), "Sandbox");
     Game game2 = new Game("Dota2", LocalDate.of(2013,7,9), "Moba");
+    Game game3 = new Game("Cyberpunk 2077", LocalDate.of(2020, 12, 10), "RPG");
 
     games.add(game1);
     games.add(game2);
+    games.add(game3);
     for(int i = 0;i < games.size(); i++)
     {
       System.out.println("Game: " + games.get(i).getTitle() + "|  Genre: " + games.get(i).getGenre() + "|  ReleaseDate: " +  games.get(i).getReleaseDate());
@@ -23,13 +25,18 @@ public class Main
 
     GameCard card1 = new GameCard(game1);
     GameCard card2 = new GameCard(game2);
+    GameCard card3 = new GameCard(game3);
     
     card1.addCopy(new GameCopy("PC", "Digital"));
     card2.addCopy(new GameCopy("PS", "Digital"));
     card1.setRating(8.92);
     card2.setRating(8.1);
+    card1.addCopy(new GameCopy("PS5", "Physical"));
+    card3.addCopy(new GameCopy("PS5", "Digital"));
+
     collector1.getLibrary().addGameCard(card1);
     collector1.getLibrary().addGameCard(card2);
+    collector1.getLibrary().addGameCard(card3);
     
     collector2.getLibrary().addGameCard(card2);
     card1.setRating(9.99);
@@ -48,16 +55,51 @@ public class Main
     System.out.println(minecraft.getCopy(1).getConsole());
     System.out.println(collector1.getLibrary().getNumberOfCards());
 
-    collector1.getLibrary().sortByTitle();
     
+    System.out.println("++++++++++ SORTING BY TITLE +++++++++++");
+
+    collector1.getLibrary().sortByTitle();
     
     for(int i = 0; i < collector1.getLibrary().getNumberOfCards(); i++)
     {
       System.out.println(collector1.getLibrary().getGameCard(i).getGame().getTitle());
     }
+
+    System.out.println("++++++++++ SORTING BY RELEASE DATE +++++++++++");
+
+    collector1.getLibrary().sortByReleaseDate();
+
+    for(int i = 0; i < collector1.getLibrary().getNumberOfCards(); i++)
+    {
+      System.out.println(collector1.getLibrary().getGameCard(i).getGame().getReleaseDate());
+    }
+
+    System.out.println("+++++++++++++ SORTING BY GENRE +++++++++++++");
+
+    collector1.getLibrary().sortByGenre();
+
+    for(int i = 0; i < collector1.getLibrary().getNumberOfCards(); i++)
+    {
+      System.out.println(collector1.getLibrary().getGameCard(i).getGame().getGenre());
+    }
+
+    System.out.println("+++++++++++++ FILTERING BY CONSOLE ++++++++++++++");
+
+    ArrayList<GameCard> ps5Games =  collector1.getLibrary().filterByConsole("PS5");
+    ArrayList<GameCard> PCGames =  collector1.getLibrary().filterByConsole("PC");
+
+    System.out.println("++++++++++++ PS5 GAMES +++++++++++++");
+    for(int i = 0; i < ps5Games.size(); i++)
+    {
+      System.out.println(ps5Games.get(i).getGame().getTitle());
+    }
+    System.out.println("++++++++++++ PC GAMES +++++++++++++");
+    for(int i = 0;i < PCGames.size(); i++)
+    {
+      System.out.println(PCGames.get(i).getGame().getTitle());
+    }
+
+
+
   }
-
-
-
-
 }
