@@ -32,5 +32,4 @@ public class Collector
   {
     return library;
   }
-
 }

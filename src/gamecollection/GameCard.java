@@ -1,48 +1,76 @@
 package gamecollection;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class GameCard
 {
   private Game game;
-  private String console;
-  private String copyType;
+  private ArrayList<GameCopy> copies;
   private Double rating;
   private String review;
   private String notes;
   private LocalDate playedDate;
 
-  public GameCard(Game game, String console,String copyType)
+  public GameCard(Game game)
   {
     this.game = game;
-    this.console = console;
-    this.copyType = copyType;
+    this.copies = new ArrayList<>();
   }
+  
   public void setGame(Game game)
   {
     this.game = game;
   }
-  public void setConsole(String console)
+
+  
+  public int getNumberOfCopies()
   {
-    this.console = console;
+    return copies.size();
   }
-  public void setCopyType(String copyType)
+  public GameCopy getCopy(int index)
   {
-    this.copyType = copyType;
+    if(index >= 0 && index < copies.size())
+    {
+      return copies.get(index);
+    }
+    return null;
   }
+
+  public boolean containsCopy(GameCopy copy)
+  {
+    for(int i = 0; i < copies.size();i++)
+    {
+      if(copy.getConsole().equalsIgnoreCase(copies.get(i).getConsole()) && copy.getCopyType().equalsIgnoreCase(copies.get(i).getCopyType()))
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public void addCopy(GameCopy copy)
+  {
+    if(containsCopy(copy) != true)
+    {
+      copies.add(copy);
+    }
+  }
+  public void removeCopy(int index)
+  {
+    if(index >= 0 && index < copies.size())
+    {
+      copies.remove(index);
+    }
+  }
+
+  
 
   public Game getGame()
   {
     return game;
   }
-  public String getConsole()
-  {
-    return console;
-  }
-  public String getCopyType()
-  {
-    return copyType;
-  }
+
 
   public void setRating(double rating)
   {
@@ -86,5 +114,7 @@ public class GameCard
   {
     return playedDate;
   }
+
+
 
 }

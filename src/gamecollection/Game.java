@@ -36,7 +36,7 @@ public class Game
   public void setGenre(String genre)
   {
     this.genre = genre;
-  }
+  }   
 
 
 }
